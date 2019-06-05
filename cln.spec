@@ -4,7 +4,7 @@
 #
 Name     : cln
 Version  : 1.3.4
-Release  : 1
+Release  : 2
 URL      : https://www.ginac.de/CLN/cln-1.3.4.tar.bz2
 Source0  : https://www.ginac.de/CLN/cln-1.3.4.tar.bz2
 Summary  : Class Library for Numbers
