@@ -4,16 +4,17 @@
 #
 Name     : cln
 Version  : 1.3.4
-Release  : 2
+Release  : 3
 URL      : https://www.ginac.de/CLN/cln-1.3.4.tar.bz2
 Source0  : https://www.ginac.de/CLN/cln-1.3.4.tar.bz2
 Summary  : Class Library for Numbers
 Group    : Development/Tools
 License  : GPL-2.0
-Requires: cln-bin
-Requires: cln-lib
-Requires: cln-license
-Requires: cln-man
+Requires: cln-bin = %{version}-%{release}
+Requires: cln-info = %{version}-%{release}
+Requires: cln-lib = %{version}-%{release}
+Requires: cln-license = %{version}-%{release}
+Requires: cln-man = %{version}-%{release}
 
 %description
 Class Library for Numbers
@@ -34,7 +35,7 @@ not heap allocated.
 - Automatic, non-interruptive garbage collection.
 - Speed efficiency:
 - Assembly language kernel for some CPUs,
-- Karatsuba and SchÃ¶nhage-Strassen multiplication.
+- Karatsuba and Schönhage-Strassen multiplication.
 - Interoperability:
 - Garbage collection with no burden on
 the main application,
@@ -43,8 +44,7 @@ the main application,
 %package bin
 Summary: bin components for the cln package.
 Group: Binaries
-Requires: cln-license
-Requires: cln-man
+Requires: cln-license = %{version}-%{release}
 
 %description bin
 bin components for the cln package.
@@ -53,27 +53,27 @@ bin components for the cln package.
 %package dev
 Summary: dev components for the cln package.
 Group: Development
-Requires: cln-lib
-Requires: cln-bin
-Provides: cln-devel
+Requires: cln-lib = %{version}-%{release}
+Requires: cln-bin = %{version}-%{release}
+Provides: cln-devel = %{version}-%{release}
+Requires: cln = %{version}-%{release}
 
 %description dev
 dev components for the cln package.
 
 
-%package doc
-Summary: doc components for the cln package.
-Group: Documentation
-Requires: cln-man
+%package info
+Summary: info components for the cln package.
+Group: Default
 
-%description doc
-doc components for the cln package.
+%description info
+info components for the cln package.
 
 
 %package lib
 Summary: lib components for the cln package.
 Group: Libraries
-Requires: cln-license
+Requires: cln-license = %{version}-%{release}
 
 %description lib
 lib components for the cln package.
@@ -97,28 +97,37 @@ man components for the cln package.
 
 %prep
 %setup -q -n cln-1.3.4
+cd %{_builddir}/cln-1.3.4
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1535494127
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1573776228
+export GCC_IGNORE_WERROR=1
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %configure --disable-static
 make  %{?_smp_mflags}
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1535494127
+export SOURCE_DATE_EPOCH=1573776228
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/cln
-cp COPYING %{buildroot}/usr/share/doc/cln/COPYING
+mkdir -p %{buildroot}/usr/share/package-licenses/cln
+cp %{_builddir}/cln-1.3.4/COPYING %{buildroot}/usr/share/package-licenses/cln/9b8afbb8365ddef80760a26c474036d9d81a0cfd
 %make_install
 
 %files
@@ -211,9 +220,9 @@ cp COPYING %{buildroot}/usr/share/doc/cln/COPYING
 /usr/lib64/libcln.so
 /usr/lib64/pkgconfig/cln.pc
 
-%files doc
+%files info
 %defattr(0644,root,root,0755)
-%doc /usr/share/info/*
+/usr/share/info/cln.info
 
 %files lib
 %defattr(-,root,root,-)
@@ -221,9 +230,9 @@ cp COPYING %{buildroot}/usr/share/doc/cln/COPYING
 /usr/lib64/libcln.so.6.0.4
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/cln/COPYING
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/cln/9b8afbb8365ddef80760a26c474036d9d81a0cfd
 
 %files man
-%defattr(-,root,root,-)
+%defattr(0644,root,root,0755)
 /usr/share/man/man1/pi.1
