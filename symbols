@@ -185,8 +185,12 @@ libcln.so.6:_ZN3cln13double_approxERKNS_5cl_LFE
 libcln.so.6:_ZN3cln13double_approxERKNS_5cl_RAE
 libcln.so.6:_ZN3cln13double_approxERKNS_5cl_SFE
 libcln.so.6:_ZN3cln13float_epsilonENS_14float_format_tE
+libcln.so.6:_ZN3cln13fprintdecimalERSoi
+libcln.so.6:_ZN3cln13fprintdecimalERSoj
 libcln.so.6:_ZN3cln13fprintdecimalERSol
 libcln.so.6:_ZN3cln13fprintdecimalERSom
+libcln.so.6:_ZN3cln13fprintdecimalERSox
+libcln.so.6:_ZN3cln13fprintdecimalERSoy
 libcln.so.6:_ZN3cln13lnx_ratseriesERKNS_5cl_LFE
 libcln.so.6:_ZN3cln13mul_10_plus_xERKNS_4cl_IEh
 libcln.so.6:_ZN3cln13nextprobprimeERKNS_4cl_RE
@@ -295,8 +299,12 @@ libcln.so.6:_ZN3cln17cl_make_heap_GV_IEm
 libcln.so.6:_ZN3cln17cl_make_heap_GV_IEml
 libcln.so.6:_ZN3cln17compute_zeta_cvz1Eim
 libcln.so.6:_ZN3cln17compute_zeta_cvz2Eim
+libcln.so.6:_ZN3cln17fprinthexadecimalERSoi
+libcln.so.6:_ZN3cln17fprinthexadecimalERSoj
 libcln.so.6:_ZN3cln17fprinthexadecimalERSol
 libcln.so.6:_ZN3cln17fprinthexadecimalERSom
+libcln.so.6:_ZN3cln17fprinthexadecimalERSox
+libcln.so.6:_ZN3cln17fprinthexadecimalERSoy
 libcln.so.6:_ZN3cln17modint_ring_cacheC1Ev
 libcln.so.6:_ZN3cln17modint_ring_cacheC2Ev
 libcln.so.6:_ZN3cln17modint_ring_cacheD1Ev
